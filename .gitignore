@@ -1,0 +1,38 @@
+# Keil MDK 5 编译输出文件和中间文件
+*.axf
+*.crf
+*.d
+*.dep
+*.elf
+*.hex
+*.htm
+*.lnp
+*.lst
+*.map
+*.o
+*.build_log.htm
+
+# Keil 对象目录
+Objects/
+Listings/
+
+# Keil 调试文件
+*.uvguix.*
+*.uvoptx
+*.uvprojx.autosave
+
+# JLink 调试文件
+*.jlink
+
+# 临时文件和备份文件
+*~
+*.bak
+*.tmp
+*.sdf
+*.ipch
+
+# IDE 工作区文件
+*.workspace
+
+# 编译日志
+*.log
