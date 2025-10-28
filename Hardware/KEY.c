@@ -1,45 +1,32 @@
 #include "stm32f10x.h"                  // Device header
-#include "Delay.h"
 #include "KEY.h"
 #define KEY_PRESSED				1
 #define KEY_UNPRESSED			0
 
-#define KEY_TIME_DOUBLE			200
-#define KEY_TIME_LONG			1000
-#define KEY_TIME_REPEAT			100
+#define KEY_TIME_DOUBLE			5
+#define KEY_TIME_LONG			50
+#define KEY_TIME_REPEAT			10
 #define __KEY_H
-#define KEY_COUNT				4
+#define KEY_COUNT				1
 
 uint8_t Key_Flag[KEY_COUNT];
+
+void KEY_Init(void)
+{
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_Init(GPIOB,&GPIO_InitStructure);
+}
+
 uint8_t Key_GetState(uint8_t n)
 {
-	if (n == KEY_1)
+	if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15) == 0)
 	{
-		if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_4) == 0)
-		{
 			return KEY_PRESSED;
-		}
-	}
-	else if (n == KEY_2)
-	{
-		if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_2) == 0)
-		{
-			return KEY_PRESSED;
-		}
-	}
-	else if (n == KEY_3)
-	{
-		if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == 0)
-		{
-			return KEY_PRESSED;
-		}
-	}
-	else if (n == KEY_4)
-	{
-		if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_14) == 0)
-		{
-			return KEY_PRESSED;
-		}
 	}
 	return KEY_UNPRESSED;
 }
@@ -160,22 +147,5 @@ void Key_Tick(void)
 	}
 }
 
-void KEY_Init(void)
-{
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
-	
-	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_4| GPIO_Pin_0;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-	GPIO_Init(GPIOA,&GPIO_InitStructure);
-	
-	GPIO_InitTypeDef GPIO_InitStructure_2;
-	GPIO_InitStructure_2.GPIO_Pin = GPIO_Pin_14;
-	GPIO_InitStructure_2.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure_2.GPIO_Mode = GPIO_Mode_IPU;
-	GPIO_Init(GPIOC,&GPIO_InitStructure_2);
-}
 
-//上a4:1,下a2:2,确认a0:3,返回c14:4
+

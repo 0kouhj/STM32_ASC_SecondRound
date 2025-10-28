@@ -17,4 +17,5 @@
 void KEY_Init(void);
 uint8_t Key_Check(uint8_t n, uint8_t Flag);
 void Key_Tick(void);
+uint8_t Key_GetState(uint8_t n);
 #endif

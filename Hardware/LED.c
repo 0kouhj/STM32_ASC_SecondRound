@@ -1,9 +1,7 @@
 #include "stm32f10x.h"                  // Device header
-#include "LED_Control.h"
 #include "KEY.h"
-extern int8_t LED_Speed;
-extern int8_t LED_Direct;
-extern int16_t LED_Speed_Count;
+
+#define LED_Pin					GPIO_Pin_0;
 
 void LED_Init(void)
 {
@@ -18,17 +16,3 @@ void LED_Init(void)
 	GPIO_SetBits(GPIOB,GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15);
 }
 
-void TIM2_IRQHandler(void)
-{
-	if (TIM_GetITStatus(TIM2,TIM_IT_Update)==SET)
-	{
-		Key_Tick();
-		LED_Speed_Count++;
-		if (LED_Speed_Count>=LED_Speed*100)
-		{
-			LED_Light(LED_Direct);
-			LED_Speed_Count=0;
-		}
-		TIM_ClearITPendingBit(TIM2,TIM_IT_Update);
-	}
-}
