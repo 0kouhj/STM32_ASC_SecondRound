@@ -723,16 +723,6 @@
               <FilePath>.\Hardware\PWM.h</FilePath>
             </File>
             <File>
-              <FileName>Servo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\Servo.c</FilePath>
-            </File>
-            <File>
-              <FileName>Servo.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\Servo.h</FilePath>
-            </File>
-            <File>
               <FileName>Motor.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\Motor.c</FilePath>
@@ -771,6 +761,18 @@
         </Group>
         <Group>
           <GroupName>Software</GroupName>
+          <Files>
+            <File>
+              <FileName>menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Software\menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Software\menu.h</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

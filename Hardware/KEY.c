@@ -3,34 +3,53 @@
 #define KEY_PRESSED				1
 #define KEY_UNPRESSED			0
 
-#define KEY_TIME_DOUBLE			5
+#define KEY_TIME_DOUBLE			10
 #define KEY_TIME_LONG			50
 #define KEY_TIME_REPEAT			10
 #define __KEY_H
-#define KEY_COUNT				1
+#define KEY_COUNT				3
 
 uint8_t Key_Flag[KEY_COUNT];
 
 void KEY_Init(void)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15|GPIO_Pin_12;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
 	GPIO_Init(GPIOB,&GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_Init(GPIOA,&GPIO_InitStructure);
 }
 
 uint8_t Key_GetState(uint8_t n)
 {
-	if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15) == 0)
+	if (n == KEY_1)
 	{
+		if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_12) == 0)
+		{
 			return KEY_PRESSED;
+		}
+	}
+	else if (n == KEY_2)
+	{
+		if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15) == 0)
+		{
+			return KEY_PRESSED;
+		}
+	}
+	else if (n == KEY_3)
+	{
+		if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_9) == 0)
+		{
+			return KEY_PRESSED;
+		}
 	}
 	return KEY_UNPRESSED;
 }
-
 uint8_t Key_Check(uint8_t n, uint8_t Flag)
 {
 	if (Key_Flag[n] & Flag)

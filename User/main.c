@@ -6,16 +6,19 @@
 #include "Timer.h"
 #include "Motor.h"
 uint16_t Angle =50;
-
+int8_t kp = 0;
+int8_t ki = 0;
+int8_t kd = 0;
+int8_t Motor_Mode =1;
 
 int main()
 {
 	OLED_Init();
 	Motor_Init();
-	OLED_ShowString(1,1,"Speed=");
-	Motor_SetSpeed(50);
+	KEY_Init();
+	Timer_Init();
 	while(1)
 	{
-		
+		menu1();
 	}
 }
