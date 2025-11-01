@@ -22,5 +22,3 @@ int main()
 		menu1();
 	}
 }
-//test
-//test2

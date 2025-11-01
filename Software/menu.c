@@ -11,26 +11,27 @@ void menu1(void)
 {
 	uint8_t CurLine_Num = 1;
 	uint8_t Flag_E =0;
-	OLED_ShowString(1,2,"CurMode");
-	OLED_ShowString(2,2,"KP");
-	OLED_ShowString(3,2,"KI");
-	OLED_ShowString(4,2,"KD");
+	OLED_ShowString(20,0,"CurMode",OLED_8X16);
+	OLED_ShowString(20,16,"KP",OLED_8X16);
+	OLED_ShowString(20,32,"KI",OLED_8X16);
+	OLED_ShowString(20,48,"KD",OLED_8X16);
 	while(1)
 	{
 		//Motor_SetSpeed(kp);
-		OLED_ShowNum(1,14,Motor_Mode,1);
-		OLED_ShowSignedNum(2,6,kp,3);
-		OLED_ShowSignedNum(3,6,ki,3);
-		OLED_ShowSignedNum(4,6,kd,3);
+		OLED_Update();
+		OLED_ShowNum(104,0,Motor_Mode,1,OLED_8X16);
+		OLED_ShowSignedNum(80,16,kp,3,OLED_8X16);
+		OLED_ShowSignedNum(80,32,ki,3,OLED_8X16);
+		OLED_ShowSignedNum(80,48,kd,3,OLED_8X16);
 		
-		for (int j =1;j<=4;j++)
+		for (int j =0;j<4;j++)
 		{
-			if (j==CurLine_Num) OLED_ShowChar(j,1,'>');
-			else OLED_ShowChar(j,1,' ');
+			if (j==CurLine_Num-1) OLED_ShowChar(0,j*16,'>',OLED_8X16);
+			else OLED_ShowChar(0,j*16,' ',OLED_8X16);
 		}
 		if (Flag_E)
 		{
-			OLED_ShowChar(CurLine_Num,15,'E');
+			OLED_ShowChar(120,(CurLine_Num-1)*16,'E',OLED_8X16);
 			switch (CurLine_Num)
 			{
 				case 1:
@@ -53,9 +54,9 @@ void menu1(void)
 		}
 		else
 		{
-			for (int i = 1;i<=4;i++)
+			for (int i = 0;i<3;i++)
 			{
-				OLED_ShowChar(i,15,' ');
+				OLED_ShowChar(120,i*16,' ',OLED_8X16);
 			}
 			if (Key_Check(KEY_1,KEY_SINGLE))
 			{
