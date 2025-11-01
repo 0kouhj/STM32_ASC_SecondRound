@@ -772,6 +772,16 @@
               <FileType>5</FileType>
               <FilePath>.\Software\menu.h</FilePath>
             </File>
+            <File>
+              <FileName>Serial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Software\Serial.c</FilePath>
+            </File>
+            <File>
+              <FileName>Serial.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Software\Serial.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

@@ -2,6 +2,8 @@
 #include "OLED.h"
 #include "KEY.h"
 #include "Motor.h"
+#include "Serial.h"
+
 extern int8_t kp;
 extern int8_t ki;
 extern int8_t kd;
@@ -18,6 +20,7 @@ void menu1(void)
 	while(1)
 	{
 		//Motor_SetSpeed(kp);
+		Serial_SendByte(kp);
 		OLED_ShowNum(1,14,Motor_Mode,1);
 		OLED_ShowSignedNum(2,6,kp,3);
 		OLED_ShowSignedNum(3,6,ki,3);

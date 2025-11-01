@@ -5,6 +5,8 @@
 #include "KEY.h"
 #include "Timer.h"
 #include "Motor.h"
+#include "Serial.h"
+
 uint16_t Angle =50;
 int8_t kp = 0;
 int8_t ki = 0;
@@ -15,11 +17,11 @@ int main()
 {
 	OLED_Init();
 	Motor_Init();
-	KEY_Init();
+	//KEY_Init();
 	Timer_Init();
+	Serial_Init();
 	while(1)
 	{
 		menu1();
 	}
 }
-//test
