@@ -3,12 +3,11 @@
 #include "KEY.h"
 #include "Motor.h"
 #include "Serial.h"
-
+#include "Motor_Control.h"
 extern int8_t kp;
 extern int8_t ki;
 extern int8_t kd;
 extern int8_t Motor_Mode;
-
 void menu1(void)
 {
 	uint8_t CurLine_Num = 1;
@@ -19,8 +18,7 @@ void menu1(void)
 	OLED_ShowString(4,2,"KD");
 	while(1)
 	{
-		//Motor_SetSpeed(kp);
-		Serial_SendByte(kp);
+		Serial_MotorSpeedControl();
 		OLED_ShowNum(1,14,Motor_Mode,1);
 		OLED_ShowSignedNum(2,6,kp,3);
 		OLED_ShowSignedNum(3,6,ki,3);

@@ -33,7 +33,7 @@ void TIM3_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM3,TIM_IT_Update)==SET)
 	{
-		Key_Tick();
+		//Key_Tick();
 		TIM_ClearITPendingBit(TIM3,TIM_IT_Update);
 	}
 }

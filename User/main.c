@@ -8,7 +8,7 @@
 #include "Serial.h"
 
 uint16_t Angle =50;
-int8_t kp = 0;
+int8_t kp = 10;
 int8_t ki = 0;
 int8_t kd = 0;
 int8_t Motor_Mode =1;
