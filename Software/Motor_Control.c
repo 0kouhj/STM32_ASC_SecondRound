@@ -2,15 +2,14 @@
 #include "Serial.h"
 #include "Motor.h"
 #include "string.h"
+extern int32_t Speed;
 void Serial_MotorSpeedControl(void)
 {
     if (Serial_RxFlag == 1)
     {
-        int32_t speed = 0;
-        if (sscanf(Serial_RxPacket, "Speed%d", &speed) == 1)
+        if (sscanf(Serial_RxPacket, "Speed%d", &Speed) == 1)
         {
-            Serial_Printf("Motor_Speed_Set: %d\r\n", speed);
-			Motor_SetSpeed(speed);
+			Motor_SetSpeed(Speed);
         }
         else 
         {

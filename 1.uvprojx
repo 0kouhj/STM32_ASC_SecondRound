@@ -732,6 +732,16 @@
               <FileType>5</FileType>
               <FilePath>.\Hardware\Motor.h</FilePath>
             </File>
+            <File>
+              <FileName>Encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>Encoder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\Encoder.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -791,6 +801,16 @@
               <FileName>Motor_Control.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Software\Motor_Control.h</FilePath>
+            </File>
+            <File>
+              <FileName>Vofa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Software\Vofa.c</FilePath>
+            </File>
+            <File>
+              <FileName>Vofa.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Software\Vofa.h</FilePath>
             </File>
           </Files>
         </Group>

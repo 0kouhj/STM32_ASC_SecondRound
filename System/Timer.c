@@ -1,6 +1,9 @@
 #include "stm32f10x.h"                  // Device header
 #include "stdint.h"
 #include "KEY.h"
+#include "Encoder.h"
+extern int32_t Speed;
+extern uint16_t Motor_Speed_Get_Count;
 void Timer_Init(void)
 {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
@@ -34,6 +37,12 @@ void TIM3_IRQHandler(void)
 	if (TIM_GetITStatus(TIM3,TIM_IT_Update)==SET)
 	{
 		//Key_Tick();
+		static uint16_t Count;
+		Count++;
+		if (Count >= Motor_Speed_Get_Count)
+		{
+			Speed = Encoder_Get();
+		}
 		TIM_ClearITPendingBit(TIM3,TIM_IT_Update);
 	}
 }

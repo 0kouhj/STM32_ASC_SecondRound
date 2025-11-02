@@ -2,12 +2,13 @@
 #include "OLED.h"
 #include "KEY.h"
 #include "Motor.h"
-#include "Serial.h"
 #include "Motor_Control.h"
+#include "Vofa.h"
 extern int8_t kp;
 extern int8_t ki;
 extern int8_t kd;
 extern int8_t Motor_Mode;
+extern uint16_t Motor_Speed_Get_Count;
 void menu1(void)
 {
 	uint8_t CurLine_Num = 1;
@@ -18,13 +19,15 @@ void menu1(void)
 	OLED_ShowString(4,2,"KD");
 	while(1)
 	{
-		Serial_MotorSpeedControl();
+		Serial_PrintToVofa();							//打印串口信息到vofa
+		Serial_MotorSpeedControl();						//获取串口命令
+		
 		OLED_ShowNum(1,14,Motor_Mode,1);
 		OLED_ShowSignedNum(2,6,kp,3);
 		OLED_ShowSignedNum(3,6,ki,3);
 		OLED_ShowSignedNum(4,6,kd,3);
 		
-		for (int j =1;j<=4;j++)
+		for (int j =1;j<=4;j++)							//光标这一块
 		{
 			if (j==CurLine_Num) OLED_ShowChar(j,1,'>');
 			else OLED_ShowChar(j,1,' ');
@@ -70,5 +73,17 @@ void menu1(void)
 			}
 			if (Key_Check(KEY_3,KEY_SINGLE)) Flag_E = !Flag_E;
 		}
+	}
+}
+
+void Motor_Mode_Check(int8_t Motor_Mode)
+{
+	if (Motor_Mode==1)
+	{
+		Motor_Speed_Get_Count = 50;
+	}
+	else 
+	{
+		Motor_Speed_Get_Count = 200;
 	}
 }
