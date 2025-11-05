@@ -13,15 +13,16 @@ uint8_t Key_Flag[KEY_COUNT];
 
 void KEY_Init(void)
 {
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15|GPIO_Pin_12;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15|GPIO_Pin_13;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-	GPIO_Init(GPIOB,&GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
+	GPIO_Init(GPIOC,&GPIO_InitStructure);
 	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
 	GPIO_Init(GPIOA,&GPIO_InitStructure);
 }
 
@@ -29,21 +30,21 @@ uint8_t Key_GetState(uint8_t n)
 {
 	if (n == KEY_1)
 	{
-		if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_12) == 0)
+		if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_15) == 1)
 		{
 			return KEY_PRESSED;
 		}
 	}
 	else if (n == KEY_2)
 	{
-		if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15) == 0)
+		if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) == 1)
 		{
 			return KEY_PRESSED;
 		}
 	}
 	else if (n == KEY_3)
 	{
-		if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_9) == 0)
+		if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_11) == 0)
 		{
 			return KEY_PRESSED;
 		}

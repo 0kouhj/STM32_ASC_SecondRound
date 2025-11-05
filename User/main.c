@@ -8,19 +8,19 @@
 #include "Serial.h"
 #include "Encoder.h"
 uint16_t Angle =50;
-int8_t kp = 10;
-int8_t ki = 0;
-int8_t kd = 0;
-int8_t Motor_Mode =1;
-int32_t Speed = 0;
-uint16_t Motor_Speed_Get_Count=50;
+int8_t Motor_Mode =0;//0,1为速度任务,不是0 or 1为位置任务
+int32_t Set_Speed_1 = 0;
+int32_t Get_Speed_1 = 0;
+int32_t Set_Speed_2 = 0;
+int32_t Get_Speed_2 = 0;
+uint16_t Motor_Speed_Get_Count=2;
 
 int main()
 {
 	OLED_Init();
 	Motor_Init();
-	//KEY_Init();
-	//Timer_Init();TIM3,与Encoder重复
+	KEY_Init();
+	Timer_Init();
 	Serial_Init();
 	Encoder_Init();
 	while(1)

@@ -14,7 +14,7 @@ void PWM_Init(void)
 	/*GPIO初始化*/
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2|GPIO_Pin_3;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);							
 	
@@ -40,7 +40,9 @@ void PWM_Init(void)
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;   //输出使能
 	TIM_OCInitStructure.TIM_Pulse = 0;								//初始的CCR值
 	TIM_OC3Init(TIM2, &TIM_OCInitStructure);                        //将结构体变量交给TIM_OC3Init，配置TIM2的输出比较通道3
-	
+	// 初始化 TIM2_CH4 (A3) 给电机2使用
+	TIM_OC4Init(TIM2, &TIM_OCInitStructure);   // 将同样的配置用于通道4
+
 	/*TIM使能*/
 	TIM_Cmd(TIM2, ENABLE);			//使能TIM2，定时器开始运行
 }
@@ -56,3 +58,8 @@ void PWM_SetCompare3(uint16_t Compare)
 {
 	TIM_SetCompare3(TIM2, Compare);		//设置CCR3的值
 }
+void PWM_SetCompare4(uint16_t Compare)
+{
+    TIM_SetCompare4(TIM2, Compare);   // 写入 TIM2 CCR4
+}
+
